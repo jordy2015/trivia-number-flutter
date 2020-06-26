@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -19,24 +17,28 @@ Future<void> init() async {
   //feature - Number Trivia
   // Bloc
   di.registerFactory(() => NumberTriviaBloc(concrete: di(), random: di()));
-    //use cases
+  //use cases
   di.registerLazySingleton(() => GetConcreteNumberTrivia(di()));
   di.registerLazySingleton(() => GetRandomNumberTrivia(di()));
 
-    //repository
-  di.registerLazySingleton<NumberTriviaRepository>(() => NumberTriviaRespositoryImpl(localDataSource: di(), remoteDataSource: di(), networkInfo: di()));
+  //repository
+  di.registerLazySingleton<NumberTriviaRepository>(() =>
+      NumberTriviaRespositoryImpl(
+          localDataSource: di(), remoteDataSource: di(), networkInfo: di()));
 
-    //DataSource
-  di.registerLazySingleton<NumberTriviaRemoteDataSource>(() => NumberTriviaRemoteDataSourceImpl(dio: di()));
-  di.registerLazySingleton<NumberTriviaLocalDataSource>(() => NumberTriviaLocalDataSourceImpl(sharedPreferences: di()));
+  //DataSource
+  di.registerLazySingleton<NumberTriviaRemoteDataSource>(
+      () => NumberTriviaRemoteDataSourceImpl(dio: di()));
+  di.registerLazySingleton<NumberTriviaLocalDataSource>(
+      () => NumberTriviaLocalDataSourceImpl(sharedPreferences: di()));
 
-    //core
-  di.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectionChecker: di()));
+  //core
+  di.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(connectionChecker: di()));
 
-    //External
+  //External
   final sharedPreferences = await SharedPreferences.getInstance();
   di.registerLazySingleton(() => sharedPreferences);
   di.registerLazySingleton(() => Dio());
   di.registerLazySingleton(() => DataConnectionChecker());
-
 }

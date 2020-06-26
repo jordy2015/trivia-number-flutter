@@ -18,10 +18,10 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   NumberTriviaBloc({
     @required GetConcreteNumberTrivia concrete,
     @required GetRandomNumberTrivia random,
-  }) : assert(concrete != null),
-    assert(random != null),
-    getConcreteNumberTrivia = concrete,
-    getRandomNumberTrivia = random;
+  })  : assert(concrete != null),
+        assert(random != null),
+        getConcreteNumberTrivia = concrete,
+        getRandomNumberTrivia = random;
 
   @override
   Stream<NumberTriviaState> mapEventToState(
@@ -29,16 +29,16 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   ) async* {
     if (event is GetTriviaForConcreteNumber) {
       yield Loading();
-      final failureOrTrivia = await getConcreteNumberTrivia.execute(number: int.parse(event.number));
+      final failureOrTrivia = await getConcreteNumberTrivia.execute(
+          number: int.parse(event.number));
       yield failureOrTrivia.fold(
-        (failure) => throw Error(message: "Server Fail")
-        , (trivia) => Loaded(trivia: trivia));
+          (failure) => throw Error(message: "Server Fail"),
+          (trivia) => Loaded(trivia: trivia));
     } else if (event is GetTriviaForRandom) {
       yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia.execute();
-      yield failureOrTrivia.fold(
-        (failure) => Error(message: "random failt"), 
-        (trivia) => Loaded(trivia: trivia));
+      yield failureOrTrivia.fold((failure) => Error(message: "random failt"),
+          (trivia) => Loaded(trivia: trivia));
     }
     // TODO: implement mapEventToState
   }

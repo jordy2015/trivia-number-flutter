@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_project/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:test_project/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import '../../../../injection_container.dart';
 
@@ -64,11 +63,13 @@ class _TriviaControlsState extends State<TriviaControls> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextField(onChanged: (value){
-          textInput = value;
-        },
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Insert the number"),
+        TextField(
+          onChanged: (value) {
+            textInput = value;
+          },
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(), hintText: "Insert the number"),
         ),
         SizedBox(
           height: 10,
@@ -76,19 +77,18 @@ class _TriviaControlsState extends State<TriviaControls> {
         Row(
           children: <Widget>[
             Expanded(
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                child: Text("Search"),
-                onPressed: dispatchConcrete)
-            ),
+                child: RaisedButton(
+                    color: Theme.of(context).accentColor,
+                    child: Text("Search"),
+                    onPressed: dispatchConcrete)),
             SizedBox(
               width: 5,
             ),
             Expanded(
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                child: Text("Random"),
-                onPressed: dispatchRandom)),
+                child: RaisedButton(
+                    color: Theme.of(context).accentColor,
+                    child: Text("Random"),
+                    onPressed: dispatchRandom)),
           ],
         )
       ],
@@ -96,7 +96,8 @@ class _TriviaControlsState extends State<TriviaControls> {
   }
 
   void dispatchConcrete() {
-    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForConcreteNumber(number: textInput));
+    BlocProvider.of<NumberTriviaBloc>(context)
+        .add(GetTriviaForConcreteNumber(number: textInput));
   }
 
   void dispatchRandom() {
@@ -115,18 +116,16 @@ class EmptyMessage extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 3,
       child: Center(
         child: SingleChildScrollView(
-          child: Text(
-            message,
-            style: TextStyle(fontSize: 25),
-          )
-        ),
+            child: Text(
+          message,
+          style: TextStyle(fontSize: 25),
+        )),
       ),
     );
   }
 }
 
 class LoadingWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(

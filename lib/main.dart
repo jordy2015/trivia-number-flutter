@@ -3,7 +3,7 @@ import 'package:test_project/features/number_trivia/presentation/pages/number_tr
 import 'injection_container.dart' as di;
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(MyApp());
 }
@@ -11,9 +11,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Number Trivia',
-      home: NumberTriviaPage()
-    );
+    return MaterialApp(title: 'Number Trivia', home: NumberTriviaPage());
   }
 }
