@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_project/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import '../../../../injection_container.dart';
+import 'package:meta/meta.dart';
 
 class NumberTriviaPage extends StatelessWidget {
+  final String title;
+
+  NumberTriviaPage({@required this.title});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Number Trivia")),
+      appBar: AppBar(title: Text(title)),
       body: buildBlocProvider(context),
     );
   }

@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Number Trivia - ',
+        title: 'Number Trivia - QA',
         home: NumberTriviaPage(
-          title: 'Number Trivia',
+          title: 'Number Trivia - QA',
         ));
   }
 }
